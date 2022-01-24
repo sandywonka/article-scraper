@@ -15,7 +15,9 @@ class Model(object):  # class model untuk konektor ke database
         self.sql = "INSERT INTO news_article (title, url, content, summary, article_ts, published_date ) VALUES (%s, %s, %s, %s, %s, %s)"
 
 
-class Bisnis(object): # class bisnis berisikan parameter yang nantinya akan digunakan pada fungsi scrap()
+class Bisnis(
+    object
+):  # class bisnis berisikan parameter yang nantinya akan digunakan pada fungsi scrap()
     def __init__(self, url=""):
         self.url = url
         self.request = requests.get(url)
@@ -64,21 +66,23 @@ class Bisnis(object): # class bisnis berisikan parameter yang nantinya akan digu
                 print(mycursor.rowcount, "inserted.")
 
 
-class Antaranews(object): # class antaranews berisikan parameter yang nantinya akan dipakai pada fungsi scrap()
+class Antaranews(
+    object
+):  # class antaranews berisikan parameter yang nantinya akan dipakai pada fungsi scrap()
     def __init__(self, url=""):
         self.url = url
         self.request = requests.get(url)
         self.tree = html.fromstring(self.request.content)
-        self.get_title2 = self.tree.xpath(
+        self.get_title = self.tree.xpath(
             "/html/body/div/div/div[2]/div/div[1]/article/div[1]/header/h1/text()"
         )
-        self.get_summary2 = self.tree.xpath(
+        self.get_summary = self.tree.xpath(
             "/html/body/div/div/div[2]/div/div[1]/article/div[1]/div[2]/br[1]/preceding-sibling::text()[normalize-space()]"
         )
         self.get_content = self.tree.xpath(
             "/html/body/div/div/div[2]/div/div[1]/article/div[1]/div[2]/br/following-sibling::text()[normalize-space()]"
         )
-        self.get_datetime2 = self.tree.xpath("channel/item//*[3]/text()")
+        self.get_datetime = self.tree.xpath("channel/item//*[3]/text()")
         self.get_link = self.tree.xpath("channel/item/guid/text()")
 
     def scrap():  # fungsi antaranews untuk mengambil dataset yang ada pada website jambi.antaranews
@@ -89,10 +93,10 @@ class Antaranews(object): # class antaranews berisikan parameter yang nantinya a
         for x in s.get_link:
             if x not in temp:
                 detailed_init = Antaranews(x)
-                get_title = detailed_init.get_title2
-                get_summary = [x.strip() for x in detailed_init.get_summary2]
+                get_title = detailed_init.get_title
+                get_summary = [x.strip() for x in detailed_init.get_summary]
                 get_content = [x.strip() for x in detailed_init.get_content]
-                get_timestamp = [x for x in s.get_datetime2[0].split(",")]
+                get_timestamp = [x for x in s.get_datetime[0].split(",")]
                 get_timestamp = get_timestamp[1].split(",")
                 get_timestamp = str(get_timestamp).strip("[]''")
                 date_time = parser.parse(get_timestamp)
