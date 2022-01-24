@@ -42,3 +42,7 @@ python controller.py
 ```
 
 Or simply run controller.py
+
+## Screenshot
+![Capture](https://user-images.githubusercontent.com/72706163/150769117-e682f601-0f84-4771-b7b5-947d0d3357b2.JPG)
+
