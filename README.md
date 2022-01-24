@@ -3,7 +3,7 @@ News Portal Scraping Bot Using Python and Integrated with MySQL Database
 
 # Tools
 - Python 3.8.3
-- 
+
 ## Installation
 Create virtual environment for python.
 ```bash
@@ -20,6 +20,7 @@ pip install -r requirements.txt
 
 ## Usage
 
+MySQL
 ```sql
 CREATE TABLE prog_test.news_article (
   id int(11) NOT NULL AUTO_INCREMENT,
@@ -35,7 +36,7 @@ CREATE TABLE prog_test.news_article (
   UNIQUE KEY UNIK (url)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 ```
-
+Run program from git/cmd
 ```bash
 python controller.py
 ```
