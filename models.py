@@ -61,9 +61,12 @@ class Bisnis(
                         date_time,
                     )
                 ]
-                mycursor.executemany(m.sql, val)
-                m.db.commit()
-                print(mycursor.rowcount, "inserted.")
+                try:
+                    mycursor.executemany(m.sql, val)
+                    m.db.commit()
+                    print(mycursor.rowcount, "inserted.")
+                except:
+                    pass
 
 
 class Antaranews(
